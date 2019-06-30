@@ -9,5 +9,17 @@ package videoPoker;
 
 public enum Suit {
 
-    CLUBS, DIAMONDS, SPADES, HEARTS
+    CLUBS("♣"), DIAMONDS("♦"), SPADES("♠"), HEARTS("♥");
+
+    private final String suit;
+
+    // Constructor
+    Suit(String suit) {
+        this.suit = suit;
+    }
+
+    // Getters
+    public String getSuit() {
+        return suit;
+    }
 }

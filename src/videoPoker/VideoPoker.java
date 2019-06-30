@@ -1,6 +1,6 @@
 package videoPoker;
 
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * Main class with main methods
@@ -57,15 +57,48 @@ public class VideoPoker {
             boolean endRound = false;
 
             // Start dealing - Game Deck (Five cards)
-            gameDeck.drawCard(dealerDeck);
-            gameDeck.drawCard(dealerDeck);
-            gameDeck.drawCard(dealerDeck);
-            gameDeck.drawCard(dealerDeck);
-            gameDeck.drawCard(dealerDeck);
+            for (int i = 0; i < 5; i++) {
+                gameDeck.drawCardByZero(dealerDeck);
+            }
 
             while (true) {
-                System.out.println("Here is a five Cards " + gameDeck.toString());
-                break;
+                // Printing out the unique 5 cards
+                System.out.println("Dispensed 5 Cards : ");
+                System.out.print(gameDeck);
+
+                System.out.println("Enter number of cards you want to hold: ");
+                int holdArrayLength = playerInput.nextInt();
+                Integer[] holdArray = new Integer[holdArrayLength]; // TODO charArr?
+
+                System.out.println("Enter the card's positions (from 1 to 5) you want to hold: ");
+                for (int i = 0; i < holdArray.length; i++) {
+                    holdArray[i] = playerInput.nextInt();
+                }
+
+                System.out.println("Here is the position's of Cards you wanna hold: ");
+                for (int num : holdArray) {
+                    System.out.print(num + " " + "\n");
+                }
+
+                List<Integer> cardsToChange = new ArrayList<>(Arrays.asList(1,2,3,4,5));
+                List<Integer> selectedCards = new ArrayList<>(Arrays.asList(holdArray));
+                Collections.sort(selectedCards);
+                cardsToChange.removeAll(selectedCards);
+
+                System.out.println("Here is the position's of Cards you wanna change: ");
+                for (Integer num : cardsToChange) {
+                    System.out.print(num + " " + "\n");
+                } // TODO Bingo!
+
+                System.out.println("\n Continuosly holding Cards:");
+                    for (Card card : gameDeck.getCards()) {
+                        System.out.println(card);
+                    }
+
+
+                System.out.println("\n Correct? Yes(y), No(n) ");
+                boolean yesNo = playerInput.nextBoolean();
+
             }
 
 

@@ -58,7 +58,7 @@ public class VideoPoker {
 
             // Start dealing - Game Deck (Five cards)
             for (int i = 0; i < 5; i++) {
-                gameDeck.drawCardByZero(dealerDeck);
+                gameDeck.drawCard(dealerDeck);
             }
 
             while (true) {
@@ -75,28 +75,39 @@ public class VideoPoker {
                     holdArray[i] = playerInput.nextInt();
                 }
 
-                System.out.println("Here is the position's of Cards you wanna hold: ");
+                System.out.println("\nHere is the position's of Cards you wanna hold: ");
                 for (int num : holdArray) {
-                    System.out.print(num + " " + "\n");
+                    System.out.print(num + " ");
                 }
 
-                List<Integer> cardsToChange = new ArrayList<>(Arrays.asList(1,2,3,4,5));
-                List<Integer> selectedCards = new ArrayList<>(Arrays.asList(holdArray));
-                Collections.sort(selectedCards);
-                cardsToChange.removeAll(selectedCards);
+                List<Integer> cardsPositionsToChange = new ArrayList<>(Arrays.asList(1,2,3,4,5));
+                List<Integer> selectedCardsPositions = new ArrayList<>(Arrays.asList(holdArray));
+                Collections.sort(selectedCardsPositions);
+                cardsPositionsToChange.removeAll(selectedCardsPositions);
+                Collections.reverse(cardsPositionsToChange);
 
-                System.out.println("Here is the position's of Cards you wanna change: ");
-                for (Integer num : cardsToChange) {
-                    System.out.print(num + " " + "\n");
-                } // TODO Bingo!
+                System.out.println("\nHere is the position's of Cards you wanna change: ");
+                for (Integer num : cardsPositionsToChange) {
+                    System.out.print(num + " ");
+                }
 
-                System.out.println("\n Continuosly holding Cards:");
-                    for (Card card : gameDeck.getCards()) {
-                        System.out.println(card);
-                    }
+                // Throw from gameDeck not not hold cards
+                dealerDeck.backToDeck(cardsPositionsToChange, gameDeck);
+                dealerDeck.shuffle();
+
+                // Add to game gameDeck randomly generated not hold cards
+                for (int i = 0; i < cardsPositionsToChange.size(); i++) {
+                    gameDeck.drawCard(dealerDeck);
+                }
+
+                gameDeck.shuffle();
+                System.out.println("\n\nFinally dispenced cards:");
+                for (Card card : gameDeck.getCards()) {
+                    System.out.print(card + " " + " ");
+                }
 
 
-                System.out.println("\n Correct? Yes(y), No(n) ");
+                System.out.println("\n\nCorrect? Yes(y), No(n) ");
                 boolean yesNo = playerInput.nextBoolean();
 
             }

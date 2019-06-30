@@ -1,6 +1,7 @@
 package videoPoker;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -42,26 +43,43 @@ public class Deck {
     }
 
     // Method to draw card from the deck in order to move card from one deck to another
-    public void drawCardByZero(Deck deckFrom) {
+    public void drawCard(Deck deckFrom) {
         Random rand = new Random();
 //        int randIndex = rand.nextInt(deckFrom.cards.size()); //TODO draw random card
         cards.add(deckFrom.getCard(0));
         deckFrom.removeCard(0);
     }
 
-    public void drawCardByIndex(Deck deckFrom, int i) {
-        Random rand = new Random();
-        cards.add(deckFrom.getCard(i));
-        deckFrom.removeCard(i);
+    public void backToDeck(List<Integer> cardsPositionsToChange, Deck deckFrom) {
+        for (Integer num : cardsPositionsToChange) {
+            if (num == 5) {
+                cards.add(deckFrom.getCard(4));
+                deckFrom.removeCard(4);
+            }
+            if (num == 4) {
+                cards.add(deckFrom.getCard(3));
+                deckFrom.removeCard(3);
+            }
+            if (num == 3) {
+                cards.add(deckFrom.getCard(2));
+                deckFrom.removeCard(2);
+            }
+            if (num == 2) {
+                cards.add(deckFrom.getCard(1));
+                deckFrom.removeCard(1);
+            }
+            if (num == 1) {
+                cards.add(deckFrom.getCard(0));
+                deckFrom.removeCard(0);
+            }
+        }
     }
 
-    public int handRank() {
+    public int handRank(int i) {
         int handValue = 0;
-
         for (Card card : cards) {
 
         }
-
         return handValue;
     }
 

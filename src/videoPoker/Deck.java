@@ -42,11 +42,27 @@ public class Deck {
     }
 
     // Method to draw card from the deck in order to move card from one deck to another
-    public void drawCard(Deck deckFrom) {
+    public void drawCardByZero(Deck deckFrom) {
         Random rand = new Random();
 //        int randIndex = rand.nextInt(deckFrom.cards.size()); //TODO draw random card
-//        cards.add(deckFrom.getCard(0));
+        cards.add(deckFrom.getCard(0));
         deckFrom.removeCard(0);
+    }
+
+    public void drawCardByIndex(Deck deckFrom, int i) {
+        Random rand = new Random();
+        cards.add(deckFrom.getCard(i));
+        deckFrom.removeCard(i);
+    }
+
+    public int handRank() {
+        int handValue = 0;
+
+        for (Card card : cards) {
+
+        }
+
+        return handValue;
     }
 
     /* Getters and Setters */
@@ -55,12 +71,20 @@ public class Deck {
         cards.remove(i);
     }
 
+    public void addCard(Card addCard) {
+        cards.add(addCard);
+    }
+
     public Card getCard(int i) {
         return cards.get(i);
     }
 
-    public void addCard(Card addCard) {
-        cards.add(addCard);
+    public ArrayList<Card> getCards() {
+        ArrayList<Card> tempArray = new ArrayList<>();
+        for (Card card : cards) {
+            tempArray.add(card);
+        }
+        return tempArray;
     }
 
     // toString method for nicely formated string
@@ -69,7 +93,7 @@ public class Deck {
         String outputCards = "";
         int i = 1;
         for (Card card : cards) {
-            outputCards += card.toString() + "\n";
+            outputCards += i + ". " + card.toString() + "\n";
             i++;
         }
         return outputCards;

@@ -30,6 +30,6 @@ public class Card {
     // toString method for nicely formated string
     @Override
     public String toString() {
-        return rank.toString() + " of " + suit.toString();
+        return rank.getRank().toString() + "" + suit.getSuit().toString();
     }
 }

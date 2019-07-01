@@ -105,6 +105,7 @@ public class VideoPoker {
                     System.out.print(card + " " + " ");
                 }
 
+                // TODO Poker Hand Ranking Evaluations
 
                 System.out.println("\n\nWould you like to spin again (1)Yes (2)No");
                 int response = playerInput.nextInt();

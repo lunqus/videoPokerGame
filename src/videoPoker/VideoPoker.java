@@ -22,8 +22,7 @@ public class VideoPoker {
         Deck gameDeck = new Deck();
         double playerFunds = 100.00;
         double playerBet = 10.00;
-        boolean desire = true;
-        boolean gameStarted = false;
+        boolean gameContinuous = false;
 
         Scanner playerInput = new Scanner(System.in);
 
@@ -34,15 +33,15 @@ public class VideoPoker {
         */
 
         while (playerFunds > playerBet) {
-            if (gameStarted == false) {
+            if (gameContinuous == false) {
                 System.out.println("Would you like to start the game: YES(1) NO(2) ?");
                 int response = playerInput.nextInt();
                     if (response == 2) {
-                        desire = false;
+                        gameContinuous = false;
                         break;
                     }
             }
-            gameStarted = true;
+            gameContinuous = true;
 
             // After player desided to play, player fund decreasing by bet amount of €
             System.out.println("You have €" + playerFunds);
@@ -107,16 +106,21 @@ public class VideoPoker {
                 }
 
 
-                System.out.println("\n\nCorrect? Yes(y), No(n) ");
-                boolean yesNo = playerInput.nextBoolean();
+                System.out.println("\n\nWould you like to spin again (1)Yes (2)No");
+                int response = playerInput.nextInt();
+                if (response == 1) {
+                    gameContinuous = true;
+                } else {
+                    gameContinuous = false;
+                    break;
+                }
 
             }
 
 
         }
 
-        if (desire == false) {
-
+        if (gameContinuous == false) {
             System.out.println("It's up to you, come next time.");
         } else {
             System.out.println(" Game over! You are out of money. :( ");

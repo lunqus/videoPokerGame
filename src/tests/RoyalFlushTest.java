@@ -25,7 +25,7 @@ public class RoyalFlushTest {
         boolean royalFlush = poker.isRoyalFlush(royalFlushDeck);
 
         if (royalFlush) {
-            System.out.println("Royal Flush !!!");
+            System.out.println("Royal Flush !!! ");
         } else {
             System.out.println("Not royal Flush");
         }

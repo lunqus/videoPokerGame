@@ -75,12 +75,12 @@ public class Deck {
         }
     }
 
-    public int handRank(int i) {
-        int handValue = 0;
+    public String handRank() {
+        String rankValue = "";
         for (Card card : cards) {
-
+            rankValue += "1. " + card;
         }
-        return handValue;
+        return rankValue;
     }
 
     /* Getters and Setters */

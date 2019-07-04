@@ -1,6 +1,11 @@
 package videoPoker;
 
+import com.sun.tools.javadoc.Start;
+
 import java.util.*;
+
+import static videoPoker.Poker.ROYAL_FLUSH;
+import static videoPoker.Poker.STRAIGHT_FLUSH;
 
 /**
  * Main class with main methods
@@ -12,6 +17,7 @@ public class VideoPoker {
 
         System.out.println("\n === Welcome to Video Poker Game! === \n ------------------------------------ \n\n");
 
+        // Create deck of cards
         Deck dealerDeck = new Deck();
         dealerDeck.populateDeck();
         dealerDeck.shuffle();
@@ -55,7 +61,7 @@ public class VideoPoker {
 
             boolean endRound = false;
 
-            // Start dealing - Game Deck (Five cards)
+//             Start dealing - Game Deck (Five cards)
             for (int i = 0; i < 5; i++) {
                 gameDeck.drawCard(dealerDeck);
             }
@@ -69,10 +75,17 @@ public class VideoPoker {
                 int holdArrayLength = playerInput.nextInt();
                 Integer[] holdArray = new Integer[holdArrayLength]; // TODO charArr?
 
-                System.out.println("Enter the card's positions (from 1 to 5) you want to hold: ");
-                for (int i = 0; i < holdArray.length; i++) {
-                    holdArray[i] = playerInput.nextInt();
+                if (holdArrayLength < 5) {
+                    System.out.println("Enter the card's positions (from 1 to 5) you want to hold: ");
+                    for (int i = 0; i < holdArray.length; i++) {
+                        holdArray[i] = playerInput.nextInt();
+                    }
+                } else {
+                    for (int i = 0; i < 5; i++) {
+                        holdArray[i] = i+1;
+                    }
                 }
+
 
                 System.out.println("\nHere is the position's of Cards you wanna hold: ");
                 for (int num : holdArray) {
@@ -85,14 +98,16 @@ public class VideoPoker {
                 cardsPositionsToChange.removeAll(selectedCardsPositions);
                 Collections.reverse(cardsPositionsToChange);
 
-                System.out.println("\nHere is the position's of Cards you wanna change: ");
-                for (Integer num : cardsPositionsToChange) {
-                    System.out.print(num + " ");
-                }
+                if (holdArray.length < 5) {
+                    System.out.println("\nHere is the position's of Cards you wanna change: ");
+                    for (Integer num : cardsPositionsToChange) {
+                        System.out.print(num + " ");
+                    }
 
-                // Throw from gameDeck not not hold cards
-                dealerDeck.backToDeck(cardsPositionsToChange, gameDeck);
-                dealerDeck.shuffle();
+                    // Throw from gameDeck not not hold cards
+                    dealerDeck.backToDeck(cardsPositionsToChange, gameDeck);
+                    dealerDeck.shuffle();
+                }
 
                 // Add to game gameDeck randomly generated not hold cards
                 for (int i = 0; i < cardsPositionsToChange.size(); i++) {
@@ -104,8 +119,24 @@ public class VideoPoker {
                 for (Card card : gameDeck.getCards()) {
                     System.out.print(card + " " + " ");
                 }
-
+                System.out.println("\n======================================== \n");
                 // TODO Poker Hand Ranking Evaluations
+
+                Poker poker = new Poker();
+                boolean royalFlush = poker.isRoyalFlush(gameDeck);
+                boolean straightFlush = poker.isStraightFlush(gameDeck);
+
+                if (royalFlush) {
+                    playerFunds += ROYAL_FLUSH;
+                    System.out.println("Royal Flush !!!");
+                    System.out.println("Your funds now: " + playerFunds);
+                } else if (straightFlush) {
+                    playerFunds += STRAIGHT_FLUSH;
+                    System.out.println("Straight flush!");
+                    System.out.println("Your funds now: " + playerFunds);
+
+
+                } System.out.println("Not a Flush");
 
                 System.out.println("\n\nWould you like to spin again (1)Yes (2)No");
                 int response = playerInput.nextInt();

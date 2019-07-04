@@ -19,17 +19,21 @@ public class Card {
     }
 
     // Getters and Setters
-    public Suit getSuit() {
-        return suit;
+    public String getSuit() {
+        return suit.getSuit();
     }
 
-    public Rank getRank() {
-        return rank;
+    public String getRank() {
+        return rank.getRank();
+    }
+
+    public int getRankValue() {
+        return rank.getRankValue();
     }
 
     // toString method for nicely formated string
     @Override
     public String toString() {
-        return rank.getRank().toString() + "" + suit.getSuit().toString();
+        return rank.getRank().toString() + " " + suit.getSuit().toString() + " ";
     }
 }

@@ -22,12 +22,12 @@ public class RoyalFlushTest {
         royalFlushDeck.addCard(card5);
 
         Poker poker = new Poker();
-        boolean result = poker.isRoyalFlush(royalFlushDeck);
+        boolean royalFlush = poker.isRoyalFlush(royalFlushDeck);
 
-        if (result) {
-            System.out.println("Royal Flash !!!");
+        if (royalFlush) {
+            System.out.println("Royal Flush !!!");
         } else {
-            System.out.println("Not royal flush");
+            System.out.println("Not royal Flush");
         }
 
     }

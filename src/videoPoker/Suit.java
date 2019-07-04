@@ -19,6 +19,7 @@ public enum Suit {
     }
 
     // Getters
+
     public String getSuit() {
         return suit;
     }

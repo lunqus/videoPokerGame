@@ -23,8 +23,6 @@ public enum Rank {
         this.rankValue = rankValue;
     }
 
-
-
     // Getters
     public String getRank() {
         return rank;
@@ -32,5 +30,4 @@ public enum Rank {
     public int getRankValue() {
         return rankValue;
     }
-
 }

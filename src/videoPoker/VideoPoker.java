@@ -4,8 +4,7 @@ import com.sun.tools.javadoc.Start;
 
 import java.util.*;
 
-import static videoPoker.Poker.ROYAL_FLUSH;
-import static videoPoker.Poker.STRAIGHT_FLUSH;
+import static videoPoker.Poker.*;
 
 /**
  * Main class with main methods
@@ -125,19 +124,33 @@ public class VideoPoker {
                 Poker poker = new Poker();
                 boolean royalFlush = poker.isRoyalFlush(gameDeck);
                 boolean straightFlush = poker.isStraightFlush(gameDeck);
+                boolean fourKind = poker.isFourKind(gameDeck);
+                boolean fullHouse = poker.isFullHouse(gameDeck);
+                boolean flush = poker.isFlush(gameDeck);
 
                 if (royalFlush) {
                     playerFunds += ROYAL_FLUSH;
                     System.out.println("Royal Flush !!!");
-                    System.out.println("Your funds now: " + playerFunds);
+
                 } else if (straightFlush) {
                     playerFunds += STRAIGHT_FLUSH;
-                    System.out.println("Straight flush!");
-                    System.out.println("Your funds now: " + playerFunds);
+                    System.out.println("Straight Flush !!!");
 
+                } else if (fourKind) {
+                    playerFunds += FOUR_OF_KIND;
+                    System.out.println("Four of Kind !!!");
 
-                } System.out.println("Not a Flush");
+                } else if (fullHouse) {
+                    playerFunds += FULL_HOUSE;
+                    System.out.println("Full House !!!");
+                } else if (flush) {
+                    playerFunds += FLUSH;
+                    System.out.println("Flush !!! ");
+                } else {
+                    System.out.println("Nothing special !!!");
+                }
 
+                System.out.println("Your funds now: " + playerFunds);
                 System.out.println("\n\nWould you like to spin again (1)Yes (2)No");
                 int response = playerInput.nextInt();
                 if (response == 1) {
@@ -146,10 +159,7 @@ public class VideoPoker {
                     gameContinuous = false;
                     break;
                 }
-
             }
-
-
         }
 
         if (gameContinuous == false) {

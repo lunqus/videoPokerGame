@@ -37,6 +37,16 @@ public class Poker extends Deck {
         return suits;
     }
 
+    private String[] deckRankNames(Deck deck) {
+        String[] ranksNames = new String[5];
+        int i = 0;
+        for (Card card: deck.getCards()) {
+            ranksNames[i] = card.getRank();
+            i++;
+        }
+        return ranksNames;
+    }
+
     public boolean isRoyalFlush(Deck deck) {
 
         List<Integer> royalFlushValues = new ArrayList<>(Arrays.asList(14,13,12,11,10));
@@ -49,8 +59,6 @@ public class Poker extends Deck {
                 return true;
             }
         }
-
-        System.out.println(ranksValues.toString());
         return false;
     }
 
@@ -66,9 +74,37 @@ public class Poker extends Deck {
                 return true;
             }
         }
-
-        System.out.println(ranksValues.toString());
         return false;
+    }
 
+    public boolean isFourKind(Deck deck) {
+
+        String[] ranksNames = deckRankNames(deck);
+        Arrays.sort(ranksNames);
+        if (ranksNames[0] == ranksNames[1] && ranksNames[1] == ranksNames[2] && ranksNames[2] == ranksNames[3] ||
+                ranksNames[1] == ranksNames[2] && ranksNames[2] == ranksNames[3] && ranksNames[3] == ranksNames[4]) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean isFullHouse(Deck deck) {
+
+        String[] ranksNames = deckRankNames(deck);
+        Arrays.sort(ranksNames);
+        if (ranksNames[0] == ranksNames[1] && ranksNames[1] == ranksNames[2] && ranksNames[3] == ranksNames[4] ||
+                ranksNames[0] == ranksNames[1] && ranksNames[2] == ranksNames[3] && ranksNames[3] == ranksNames[4]) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean isFlush(Deck deck) {
+
+        String[] suits = deckSuits(deck);
+        if (suits[0] == suits[1] && suits[1] == suits[2] && suits[2] == suits[3] && suits[3] == suits[4]) {
+            return true;
+        }
+        return false;
     }
 }

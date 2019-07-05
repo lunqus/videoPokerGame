@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Random;
 
 /**
- * Deck class gonna be holding all the Decks
+ * Deck class for holding all the Decks of cards
  */
 
 public class Deck {

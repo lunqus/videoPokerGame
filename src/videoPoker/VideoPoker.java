@@ -7,7 +7,7 @@ import java.util.*;
 import static videoPoker.Poker.*;
 
 /**
- * Main class with main methods
+ * Main Game class with main methods
  */
 
 public class VideoPoker {
@@ -37,7 +37,7 @@ public class VideoPoker {
         *   until player has a money
         */
 
-        while (playerFunds > playerBet) {
+        while (true) {
             if (gameContinuous == false) {
                 System.out.println("Would you like to start the game: YES(1) NO(2) ?");
                 int response = playerInput.nextInt();
@@ -50,9 +50,6 @@ public class VideoPoker {
 
             // After player desided to play, player fund decreasing by bet amount of €
             System.out.println("You have €" + playerFunds);
-            playerFunds -= playerBet;
-            System.out.println("Your funds after bet €" + playerFunds);
-
             if (playerBet > playerFunds) {
                 System.out.println("You can't bet more than you have. Game Over :(");
                 break;
@@ -60,12 +57,14 @@ public class VideoPoker {
 
             boolean endRound = false;
 
-//             Start dealing - Game Deck (Five cards)
+            // Start dealing - Game Deck (Five cards)
             for (int i = 0; i < 5; i++) {
                 gameDeck.drawCard(dealerDeck);
             }
 
-            while (true) {
+            while (playerFunds > playerBet) {
+                playerFunds -= playerBet;
+                System.out.println("Your funds after bet €" + playerFunds);
                 // Printing out the unique 5 cards
                 System.out.println("Dispensed 5 Cards : ");
                 System.out.print(gameDeck);
@@ -77,6 +76,7 @@ public class VideoPoker {
                 if (holdArrayLength < 5) {
                     System.out.println("Enter the card's positions (from 1 to 5) you want to hold: ");
                     for (int i = 0; i < holdArray.length; i++) {
+                        System.out.print(i+1 + ". ");
                         holdArray[i] = playerInput.nextInt();
                     }
                 } else {
@@ -84,7 +84,6 @@ public class VideoPoker {
                         holdArray[i] = i+1;
                     }
                 }
-
 
                 System.out.println("\nHere is the position's of Cards you wanna hold: ");
                 for (int num : holdArray) {
@@ -119,35 +118,50 @@ public class VideoPoker {
                     System.out.print(card + " " + " ");
                 }
                 System.out.println("\n======================================== \n");
-                // TODO Poker Hand Ranking Evaluations
-
                 Poker poker = new Poker();
                 boolean royalFlush = poker.isRoyalFlush(gameDeck);
                 boolean straightFlush = poker.isStraightFlush(gameDeck);
                 boolean fourKind = poker.isFourKind(gameDeck);
                 boolean fullHouse = poker.isFullHouse(gameDeck);
                 boolean flush = poker.isFlush(gameDeck);
+                boolean straight = poker.isStraight(gameDeck);
+                boolean threeKind = poker.isThreeKind(gameDeck);
+                boolean twoPair = poker.isTwoPair(gameDeck);
+                boolean pair = poker.isPair(gameDeck);
+                Card higestCard = poker.higestCard(gameDeck);
 
                 if (royalFlush) {
                     playerFunds += ROYAL_FLUSH;
-                    System.out.println("Royal Flush !!!");
+                    System.out.println("Royal Flush !!! You got + " + ROYAL_FLUSH);
 
                 } else if (straightFlush) {
                     playerFunds += STRAIGHT_FLUSH;
-                    System.out.println("Straight Flush !!!");
+                    System.out.println("Straight Flush !!! You got + " + STRAIGHT_FLUSH);
 
                 } else if (fourKind) {
                     playerFunds += FOUR_OF_KIND;
-                    System.out.println("Four of Kind !!!");
+                    System.out.println("Four of Kind !!! You got + " + FOUR_OF_KIND);
 
                 } else if (fullHouse) {
                     playerFunds += FULL_HOUSE;
-                    System.out.println("Full House !!!");
+                    System.out.println("Full House !!! You got + " + FULL_HOUSE);
                 } else if (flush) {
                     playerFunds += FLUSH;
-                    System.out.println("Flush !!! ");
+                    System.out.println("Flush !!! You got + " + FLUSH);
+                } else if (straight) {
+                    playerFunds += STRAIGHT;
+                    System.out.println("Straight !!! You got + " + FLUSH);
+                } else if (threeKind) {
+                    playerFunds += THREE_OF_KIND;
+                    System.out.println("Three of a Kind !!! You got + " + THREE_OF_KIND);
+                } else if (twoPair) {
+                    playerFunds += TWO_PAIRS;
+                    System.out.println("Two Pairs !!! You got + " + TWO_PAIRS);
+                } else if (pair) {
+                    playerFunds += PAIR;
+                    System.out.println("Pair !!! You got + " + PAIR);
                 } else {
-                    System.out.println("Nothing special !!!");
+                    System.out.println("Your highest Card is: " + higestCard.toString());
                 }
 
                 System.out.println("Your funds now: " + playerFunds);

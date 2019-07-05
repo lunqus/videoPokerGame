@@ -9,7 +9,7 @@ package videoPoker;
 
 public enum Suit {
 
-    CLUBS("♣"), DIAMONDS("♦"), SPADES("♠"), HEARTS("♥");
+    CLUBS("♣Clubs"), DIAMONDS("♦Diamonds"), SPADES("♠Spades"), HEARTS("♥Hearts");
 
     private final String suit;
 

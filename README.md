@@ -1,1 +1,1 @@
-VideoPokerGame - done!
+Video Poker Game or Draw Poker - done!

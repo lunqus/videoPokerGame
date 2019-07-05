@@ -18,6 +18,8 @@ public class Card {
         this.rank = rank;
     }
 
+    public Card(){}
+
     // Getters and Setters
     public String getSuit() {
         return suit.getSuit();
